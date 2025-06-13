@@ -1,0 +1,68 @@
+[LONGITUDINAL]
+input = {delta_S,phi_S,delta_AB,alpha_01,alpha_11,alpha_02,alpha_12,alpha_03,alpha_13,alpha_04,alpha_14,alpha_05,alpha_15,alpha_06,alpha_16,alpha_07,alpha_17,alpha_08,alpha_18,alpha_09,alpha_19,alpha_010,alpha_110,alpha_011,alpha_111,alpha_012,alpha_112,alpha_013,alpha_113,alpha_014,alpha_114,alpha_015,alpha_115,alpha_016,alpha_116,alpha_017,alpha_117,alpha_018,alpha_118,alpha_019,alpha_119,alpha_020,alpha_120,alpha_021,alpha_121,alpha_022,alpha_122,alpha_023,alpha_123,alpha_024,alpha_124,alpha_025,alpha_125,alpha_026,alpha_126,alpha_027,alpha_127,alpha_028,alpha_128,alpha_029,alpha_129,alpha_030,alpha_130,alpha_031,alpha_131,alpha_032,alpha_132,alpha_033,alpha_133,alpha_034,alpha_134,alpha_035,alpha_135,alpha_036,alpha_136,alpha_037,alpha_137,alpha_038,alpha_138,alpha_039,alpha_139,alpha_040,alpha_140,alpha_041,alpha_141,alpha_042,alpha_142,alpha_043,alpha_143,alpha_044,alpha_144,alpha_045,alpha_145,alpha_046,alpha_146,alpha_047,alpha_147,alpha_048,alpha_148,alpha_049,alpha_149,alpha_050,alpha_150}
+
+EQUATION:
+t_0 = 0
+AB_0 = 1000
+S_0 = 5
+
+ddt_S = - delta_S*S
+ddt_AB = phi_S * S  - delta_AB * AB
+tAB = log10(AB)
+
+G1= alpha_01 + alpha_11 * S
+G2= alpha_02 + alpha_12 * S
+G3= alpha_03 + alpha_13 * S
+G4= alpha_04 + alpha_14 * S
+G5= alpha_05 + alpha_15 * S
+G6= alpha_06 + alpha_16 * S
+G7= alpha_07 + alpha_17 * S
+G8= alpha_08 + alpha_18 * S
+G9= alpha_09 + alpha_19 * S
+G10= alpha_010 + alpha_110 * S
+G11= alpha_011 + alpha_111 * S
+G12= alpha_012 + alpha_112 * S
+G13= alpha_013 + alpha_113 * S
+G14= alpha_014 + alpha_114 * S
+G15= alpha_015 + alpha_115 * S
+G16= alpha_016 + alpha_116 * S
+G17= alpha_017 + alpha_117 * S
+G18= alpha_018 + alpha_118 * S
+G19= alpha_019 + alpha_119 * S
+G20= alpha_020 + alpha_120 * S
+G21= alpha_021 + alpha_121 * S
+G22= alpha_022 + alpha_122 * S
+G23= alpha_023 + alpha_123 * S
+G24= alpha_024 + alpha_124 * S
+G25= alpha_025 + alpha_125 * S
+G26= alpha_026 + alpha_126 * S
+G27= alpha_027 + alpha_127 * S
+G28= alpha_028 + alpha_128 * S
+G29= alpha_029 + alpha_129 * S
+G30= alpha_030 + alpha_130 * S
+G31= alpha_031 + alpha_131 * S
+G32= alpha_032 + alpha_132 * S
+G33= alpha_033 + alpha_133 * S
+G34= alpha_034 + alpha_134 * S
+G35= alpha_035 + alpha_135 * S
+G36= alpha_036 + alpha_136 * S
+G37= alpha_037 + alpha_137 * S
+G38= alpha_038 + alpha_138 * S
+G39= alpha_039 + alpha_139 * S
+G40= alpha_040 + alpha_140 * S
+G41= alpha_041 + alpha_141 * S
+G42= alpha_042 + alpha_142 * S
+G43= alpha_043 + alpha_143 * S
+G44= alpha_044 + alpha_144 * S
+G45= alpha_045 + alpha_145 * S
+G46= alpha_046 + alpha_146 * S
+G47= alpha_047 + alpha_147 * S
+G48= alpha_048 + alpha_148 * S
+G49= alpha_049 + alpha_149 * S
+G50= alpha_050 + alpha_150 * S
+
+OUTPUT:
+output ={tAB,G1,G2,G3,G4,G5,G6,G7,G8,G9,G10,G11,G12,G13,G14,G15,G16,G17,G18,G19,G20,G21,G22,G23,G24,G25,G26,G27,G28,G29,G30,G31,G32,G33,G34,G35,G36,G37,G38,G39,G40,G41,G42,G43,G44,G45,G46,G47,G48,G49,G50}
+
+
+

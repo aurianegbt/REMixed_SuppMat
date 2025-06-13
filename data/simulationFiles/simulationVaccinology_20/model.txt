@@ -1,0 +1,38 @@
+[LONGITUDINAL]
+input = {delta_S,phi_S,delta_AB,alpha_01,alpha_11,alpha_02,alpha_12,alpha_03,alpha_13,alpha_04,alpha_14,alpha_05,alpha_15,alpha_06,alpha_16,alpha_07,alpha_17,alpha_08,alpha_18,alpha_09,alpha_19,alpha_010,alpha_110,alpha_011,alpha_111,alpha_012,alpha_112,alpha_013,alpha_113,alpha_014,alpha_114,alpha_015,alpha_115,alpha_016,alpha_116,alpha_017,alpha_117,alpha_018,alpha_118,alpha_019,alpha_119,alpha_020,alpha_120}
+
+EQUATION:
+t_0 = 0
+AB_0 = 1000
+S_0 = 5
+
+ddt_S = - delta_S*S
+ddt_AB = phi_S * S  - delta_AB * AB
+tAB = log10(AB)
+
+G1= alpha_01 + alpha_11 * S
+G2= alpha_02 + alpha_12 * S
+G3= alpha_03 + alpha_13 * S
+G4= alpha_04 + alpha_14 * S
+G5= alpha_05 + alpha_15 * S
+G6= alpha_06 + alpha_16 * S
+G7= alpha_07 + alpha_17 * S
+G8= alpha_08 + alpha_18 * S
+G9= alpha_09 + alpha_19 * S
+G10= alpha_010 + alpha_110 * S
+G11= alpha_011 + alpha_111 * S
+G12= alpha_012 + alpha_112 * S
+G13= alpha_013 + alpha_113 * S
+G14= alpha_014 + alpha_114 * S
+G15= alpha_015 + alpha_115 * S
+G16= alpha_016 + alpha_116 * S
+G17= alpha_017 + alpha_117 * S
+G18= alpha_018 + alpha_118 * S
+G19= alpha_019 + alpha_119 * S
+G20= alpha_020 + alpha_120 * S
+
+OUTPUT:
+output ={tAB,G1,G2,G3,G4,G5,G6,G7,G8,G9,G10,G11,G12,G13,G14,G15,G16,G17,G18,G19,G20}
+
+
+
