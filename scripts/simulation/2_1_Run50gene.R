@@ -9,7 +9,7 @@ library(lixoftConnectors)
 library(foreach)
 library(dplyr)
 initializeLixoftConnectors()
-library(REMix)
+library(REMixed)
 
 # Arguments of batch
 Nb_rep <- 1
