@@ -5,9 +5,9 @@ library(ggpattern)
 library(ggh4x)
 dir <- function(d){if(!dir.exists(d)){dir.create(d)}}
 # Save format
-PNG <- FALSE
+PNG <- TRUE
 JPEG <- TRUE
-EPS <- FALSE
+EPS <- TRUE
 
 saveFigures <- function(pathToSave,plot=last_plot(),height=NA,width=NA,PNG=TRUE,JPEG=TRUE,EPS=TRUE,dpi=600){
   if(PNG){
@@ -285,17 +285,17 @@ saveFigures(paste0(pathToResults,"ComparisonStatsREMixWald"),
 
 ggarrange(compStatsREMix+bb,
           selectPropREMix+bb,
-          nrow=1,widths=c(1,2),labels=c("A1","A2"))
+          nrow=1,widths=c(1.2,1.8),labels=c("A1","A2"))
 
 saveFigures(paste0(pathToResults,"Figure1R"),
-            height = 3000,width = 8000,PNG = PNG,JPEG=JPEG,EPS=EPS)
+            height = 3000,width = 7000,PNG = PNG,JPEG=JPEG,EPS=EPS)
 
 ggarrange(compStatsREMixWald + bb,
           selectPropREMixWald + bb,
-          nrow = 1, widths = c(1, 2), labels = c("B1", "B2"))
+          nrow = 1, widths = c(1.2, 2.8), labels = c("B1", "B2"))
 
 saveFigures(paste0(pathToResults,"Figure1RW"),
-            height = 3000,width = 8000,PNG = PNG,JPEG=JPEG,EPS=EPS)
+            height = 3000,width = 7000,PNG = PNG,JPEG=JPEG,EPS=EPS)
 
 # Graphs Figure 2 - Initialisation  ---------------------------------------
 load(paste0("outputs/simulationResults/InitialisationIllustration.RData"))
@@ -361,18 +361,28 @@ df_to_plot = aux %>%
 df_to_plot$genes <- factor(df_to_plot$genes,levels=df_to_plot$genes)
 df_to_plot$true <- factor(df_to_plot$true,levels=c("None","One","Both"))
 
-init1 <-
-  ggplot(df_to_plot,aes(x=genes,y=LL,color=true))+geom_point(size=3)+
-  ylab("Log-Likelihood")+
+init1 <- ggplot(df_to_plot, aes(x = genes, y = LL, shape = true, color = true)) +
+  geom_point(size = 3) +
+  ylab("Log-Likelihood") +
   xlab("Genes pair") +
-  theme(axis.title=element_text(size=12),
-        axis.text.y = element_text(size=10),
-        axis.text.x = element_text(size=8,angle=90,vjust = 0.5),
-        strip.text = element_text(size = 11),
-        plot.background = element_rect(fill='transparent', color=NA),
-        legend.key = element_rect(fill = "transparent", color = NA),
-        legend.background = element_rect(fill = "transparent", color = NA)) +
-  scale_color_manual(name="Contains\nTrue Positives",values=c("Both"="dodgerblue","One"="darkseagreen","None"="darkred"))
+  theme(
+    axis.title = element_text(size = 12),
+    axis.text.y = element_text(size = 10),
+    axis.text.x = element_text(size = 8, angle = 90, vjust = 0.5),
+    strip.text = element_text(size = 11),
+    plot.background = element_rect(fill = 'transparent', color = NA),
+    legend.key = element_rect(fill = "transparent", color = NA),
+    legend.background = element_rect(fill = "transparent", color = NA)
+  ) +
+  scale_color_manual(
+    name = "Contains\nTrue Positives",
+    values = c("Both" = "dodgerblue", "One" = "darkseagreen", "None" = "darkred")
+  ) +
+  scale_shape_manual(
+    name = "Contains\nTrue Positives",
+    values = c("Both" = 16, "One" = 17, "None" = 15) # Example shape codes
+  )
+
 
 ggarrange(initLL+bb,
           init1+bb,
@@ -382,3 +392,27 @@ ggarrange(initLL+bb,
 saveFigures(paste0(pathToResults,"Figure2"),
             height = 3000,width = 3000,PNG = PNG,JPEG=JPEG,EPS=EPS)
 
+### FIgure SUppMat
+
+initLL <-
+  ggplot(results_plot%>% filter(Nbr_genes==20),aes(x=genes_1,y=genes_2,color=LL))+
+  geom_point(size=0.7)+
+  # facet_grid(Nbr_genes~.)+
+  scale_color_gradient2(high="darkred",mid="tomato",low="navajowhite",midpoint=sum(range((results%>% filter(Nbr_genes==20))$LL))/2) +
+  geom_segment(x=5.5,xend=5.5,y=5.5,yend=20,color="black",linetype = "dashed") +
+  geom_segment(x=5.5,xend=20,y=5.5,yend=5.5,color="black",linetype = "dashed") +
+  geom_segment(x=5.5,xend=5.5,y=0,yend=5.5,color="darkred",linetype = "dashed") +
+  geom_segment(x=0,xend=5.5,y=5.5,yend=5.5,color="darkred",linetype = "dashed") +
+  geom_point(data = max_genes%>% filter(Nbr_genes==20), aes(color=LL,x = genes_1, y = genes_2, shape = "Log-likelihood\nmaximum"),size = 2,inherit.aes = FALSE) +
+  scale_shape_manual(name = "",values = c("Log-likelihood\nmaximum" = 10)) +
+  guides(shape = guide_legend()) +
+  labs(x="2nd gene",y="1st gene", color = "Log-Likelihood")+
+  theme(axis.title=element_text(size=12),
+        # legend.position="bottom",
+        strip.text = element_text(size = 11),
+        plot.background = element_rect(fill='transparent', color=NA),
+        legend.key = element_rect(fill = "transparent", color = NA),
+        legend.background = element_rect(fill = "transparent", color = NA)) +bb
+
+saveFigures(paste0(pathToResults,"Figure2Supp"),
+            height = 1500,width = 3000,PNG = PNG,JPEG=JPEG,EPS=EPS)
