@@ -331,8 +331,8 @@ initLL <-
   geom_segment(x=10.5,xend=50,y=10.5,yend=10.5,color="black",linetype = "dashed") +
   geom_segment(x=10.5,xend=10.5,y=0,yend=10.5,color="darkred",linetype = "dashed") +
   geom_segment(x=0,xend=10.5,y=10.5,yend=10.5,color="darkred",linetype = "dashed") +
-  geom_point(data = max_genes%>% filter(Nbr_genes==50), aes(color=LL,x = genes_1, y = genes_2, shape = "Log-likelihood\nmaximum"),size = 2,inherit.aes = FALSE) +
-  scale_shape_manual(name = "",values = c("Log-likelihood\nmaximum" = 10)) +
+  geom_point(data = max_genes%>% filter(Nbr_genes==50), aes(color=LL,x = genes_1, y = genes_2, shape = "Log-likelihood\nmaximum over\npairs"),size = 2,inherit.aes = FALSE) +
+  scale_shape_manual(name = "",values = c("Log-likelihood\nmaximum over\npairs" = 10)) +
   guides(shape = guide_legend()) +
   labs(x="2nd gene",y="1st gene", color = "Log-Likelihood")+
   theme(axis.title=element_text(size=12),
@@ -386,7 +386,7 @@ init1 <- ggplot(df_to_plot, aes(x = genes, y = LL, shape = true, color = true)) 
 
 ggarrange(initLL+bb,
           init1+bb,
-          ncol=1,
+          ncol=1,heights = c(1.25,1),
           labels = c("A","B"))
 
 saveFigures(paste0(pathToResults,"Figure2"),
@@ -403,8 +403,8 @@ initLL <-
   geom_segment(x=5.5,xend=20,y=5.5,yend=5.5,color="black",linetype = "dashed") +
   geom_segment(x=5.5,xend=5.5,y=0,yend=5.5,color="darkred",linetype = "dashed") +
   geom_segment(x=0,xend=5.5,y=5.5,yend=5.5,color="darkred",linetype = "dashed") +
-  geom_point(data = max_genes%>% filter(Nbr_genes==20), aes(color=LL,x = genes_1, y = genes_2, shape = "Log-likelihood\nmaximum"),size = 2,inherit.aes = FALSE) +
-  scale_shape_manual(name = "",values = c("Log-likelihood\nmaximum" = 10)) +
+  geom_point(data = max_genes%>% filter(Nbr_genes==20), aes(color=LL,x = genes_1, y = genes_2, shape = "Log-likelihood\nmaximum over\npairs"),size = 2,inherit.aes = FALSE) +
+  scale_shape_manual(name = "",values = c("Log-likelihood\nmaximum over\npairs" = 10)) +
   guides(shape = guide_legend()) +
   labs(x="2nd gene",y="1st gene", color = "Log-Likelihood")+
   theme(axis.title=element_text(size=12),
@@ -415,4 +415,5 @@ initLL <-
         legend.background = element_rect(fill = "transparent", color = NA)) +bb
 
 saveFigures(paste0(pathToResults,"Figure2Supp"),
-            height = 1500,width = 3000,PNG = PNG,JPEG=JPEG,EPS=EPS)
+            height = 1800,width = 3000,PNG = PNG,JPEG=JPEG,EPS=EPS)
+
