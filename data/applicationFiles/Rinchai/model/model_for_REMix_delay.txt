@@ -1,0 +1,84 @@
+[LONGITUDINAL]
+input = {fM1,fM2,delta_V,delta_S,theta,delta_Ab,k,td,alpha_01,alpha_11,alpha_02,alpha_12,alpha_03,alpha_13,alpha_04,alpha_14,alpha_05,alpha_15,alpha_06,alpha_16,alpha_07,alpha_17,alpha_08,alpha_18,alpha_09,alpha_19,alpha_010,alpha_110,alpha_011,alpha_111,alpha_012,alpha_112,alpha_013,alpha_113,alpha_014,alpha_114,alpha_015,alpha_115,alpha_016,alpha_116,alpha_017,alpha_117,alpha_018,alpha_118,alpha_019,alpha_119,alpha_020,alpha_120,alpha_021,alpha_121,alpha_022,alpha_122,alpha_023,alpha_123,alpha_024,alpha_124,alpha_025,alpha_125,alpha_026,alpha_126,alpha_027,alpha_127,alpha_028,alpha_128,alpha_029,alpha_129,alpha_030,alpha_130,alpha_031,alpha_131,alpha_032,alpha_132,alpha_033,alpha_133,alpha_034,alpha_134}
+
+EQUATION:
+t_0 = 0
+t_1 = 21
+S_0 = 5
+Ab_0 = 0.5
+F1_0 = 0
+F2_0 = 0
+F3_0 = 0
+F4_0 = 0
+F5_0 = 0
+F6_0 = 0
+
+odeType = stiff
+
+if t<t_1
+	 C = fM1
+    ttilde = t_0
+else
+	 C = fM2
+    ttilde = t_1
+end
+
+ddt_S = C*exp(-delta_V*(t-ttilde)) -k*S
+ddt_F1 = k*S - k*F1
+ddt_F2 = k*F1 - k*F2
+ddt_F3 = k*F2 - k*F3
+ddt_F4 = k*F3 - k*F4
+ddt_F5 = k*F4 - k*F5
+ddt_F6 = k*F5 - delta_S * F6
+ddt_Ab = theta * F6 -delta_Ab *Ab
+
+tAb = log10(Ab)
+
+if t<td
+	  Cp= 0
+    ttildep = 0
+elseif t<t_1+td
+	 Cp = fM1
+    ttildep = t_0
+else
+	 Cp = fM2
+    ttildep = t_1
+end
+
+G1 = alpha_01 + alpha_11 * Cp*exp(-delta_V*(t-ttildep-td))
+G2 = alpha_02 + alpha_12 * Cp*exp(-delta_V*(t-ttildep-td))
+G3 = alpha_03 + alpha_13 * Cp*exp(-delta_V*(t-ttildep-td))
+G4 = alpha_04 + alpha_14 * Cp*exp(-delta_V*(t-ttildep-td))
+G5 = alpha_05 + alpha_15 * Cp*exp(-delta_V*(t-ttildep-td))
+G6 = alpha_06 + alpha_16 * Cp*exp(-delta_V*(t-ttildep-td))
+G7 = alpha_07 + alpha_17 * Cp*exp(-delta_V*(t-ttildep-td))
+G8 = alpha_08 + alpha_18 * Cp*exp(-delta_V*(t-ttildep-td))
+G9 = alpha_09 + alpha_19 * Cp*exp(-delta_V*(t-ttildep-td))
+G10 = alpha_010 + alpha_110 * Cp*exp(-delta_V*(t-ttildep-td))
+G11 = alpha_011 + alpha_111 * Cp*exp(-delta_V*(t-ttildep-td))
+G12 = alpha_012 + alpha_112 * Cp*exp(-delta_V*(t-ttildep-td))
+G13 = alpha_013 + alpha_113 * Cp*exp(-delta_V*(t-ttildep-td))
+G14 = alpha_014 + alpha_114 * Cp*exp(-delta_V*(t-ttildep-td))
+G15 = alpha_015 + alpha_115 * Cp*exp(-delta_V*(t-ttildep-td))
+G16 = alpha_016 + alpha_116 * Cp*exp(-delta_V*(t-ttildep-td))
+G17 = alpha_017 + alpha_117 * Cp*exp(-delta_V*(t-ttildep-td))
+G18 = alpha_018 + alpha_118 * Cp*exp(-delta_V*(t-ttildep-td))
+G19 = alpha_019 + alpha_119 * Cp*exp(-delta_V*(t-ttildep-td))
+G20 = alpha_020 + alpha_120 * Cp*exp(-delta_V*(t-ttildep-td))
+G21 = alpha_021 + alpha_121 * Cp*exp(-delta_V*(t-ttildep-td))
+G22 = alpha_022 + alpha_122 * Cp*exp(-delta_V*(t-ttildep-td))
+G23 = alpha_023 + alpha_123 * Cp*exp(-delta_V*(t-ttildep-td))
+G24 = alpha_024 + alpha_124 * Cp*exp(-delta_V*(t-ttildep-td))
+G25 = alpha_025 + alpha_125 * Cp*exp(-delta_V*(t-ttildep-td))
+G26 = alpha_026 + alpha_126 * Cp*exp(-delta_V*(t-ttildep-td))
+G27 = alpha_027 + alpha_127 * Cp*exp(-delta_V*(t-ttildep-td))
+G28 = alpha_028 + alpha_128 * Cp*exp(-delta_V*(t-ttildep-td))
+G29 = alpha_029 + alpha_129 * Cp*exp(-delta_V*(t-ttildep-td))
+G30 = alpha_030 + alpha_130 * Cp*exp(-delta_V*(t-ttildep-td))
+G31 = alpha_031 + alpha_131 * Cp*exp(-delta_V*(t-ttildep-td))
+G32 = alpha_032 + alpha_132 * Cp*exp(-delta_V*(t-ttildep-td))
+G33 = alpha_033 + alpha_133 * Cp*exp(-delta_V*(t-ttildep-td))
+G34 = alpha_034 + alpha_134 * Cp*exp(-delta_V*(t-ttildep-td))
+
+OUTPUT:
+output ={tAb,G1,G2,G3,G4,G5,G6,G7,G8,G9,G10,G11,G12,G13,G14,G15,G16,G17,G18,G19,G20,G21,G22,G23,G24,G25,G26,G27,G28,G29,G30,G31,G32,G33,G34}
